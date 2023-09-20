@@ -1,7 +1,7 @@
 
 from itertools import permutations
 
-symbols = ['+', '-', '*', '/']
+SYMBOLS = ['+', '-', '*', '/']
 
 
 def is_solved(nerdle: str) -> bool:
@@ -18,19 +18,23 @@ def is_solved(nerdle: str) -> bool:
     except SyntaxError:
         return False
 
+
 def equal_is_last(nerdle: str) -> bool:
     return all(nerdle.index(symbol) < nerdle.index('=') 
-               for symbol in symbols if symbol in nerdle)
+               for symbol in SYMBOLS if symbol in nerdle)
+
 
 def equal_is_first(nerdle: str) -> bool:
     return all(nerdle.index(symbol) > nerdle.index('=') 
-               for symbol in symbols if symbol in nerdle)
+               for symbol in SYMBOLS if symbol in nerdle)
+
 
 def start_with_symbol(nerdle: str) -> bool:
-    return any(nerdle.startswith(symbol) for symbol in symbols)
+    return any(nerdle.startswith(symbol) for symbol in SYMBOLS)
+
 
 def two_symbols_adj(nerdle: str) -> bool:
-    for symbol in symbols:
+    for symbol in SYMBOLS:
         if symbol in nerdle:
             pos = nerdle.index(symbol)
             if pos == 0:
@@ -44,12 +48,11 @@ def two_symbols_adj(nerdle: str) -> bool:
                     return True
     return False
 
+
 def is_symbol(s: str) -> bool:
-    return s in symbols
+    return s in SYMBOLS
 
 
-
-# *  4  7 [3] =  -  9  1
 nerdle = input('Nerdle (for example: *473=-91):\n').replace(' ', '')
 correct_pos = int(input('Correct green symbol (for example, the 3 in [*473=-91] is in position 4):\n')) - 1
 
